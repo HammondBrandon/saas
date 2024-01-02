@@ -1,8 +1,35 @@
+import Image from "next/image";
 import { supabase } from "supabase";
+import PromoCard from "src/products/components/PromoCard";
 
 export default function ProductPage({ product }) {
-  console.log(product);
-  return <div>product page</div>;
+  return (
+    <section className="product-section">
+      <article className="product">
+        <div className="product-wrap">
+          <Image
+            width={1000}
+            height={300}
+            src={`/assets/${product.slug}.png`}
+            alt={product.name}
+          />
+        </div>
+        <section>
+          <header>
+            <h3>{product.name}</h3>
+          </header>
+          <section>
+            <div>
+              <p>{product.description}</p>
+            </div>
+          </section>
+        </section>
+        <section>
+          <PromoCard />
+        </section>
+      </article>
+    </section>
+  );
 }
 
 export async function getStaticPaths() {
