@@ -25,7 +25,12 @@ export default function HomePage() {
       <div className="bg-salmon">
         <div className="column-padding centered">
           <div className="callout-wrap">
-            <Image src={hero} placeholder="blur" className="callout-image" />
+            <Image
+              src={hero}
+              placeholder="blur"
+              className="callout-image"
+              alt={hero}
+            />
           </div>
         </div>
       </div>
