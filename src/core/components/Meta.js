@@ -1,3 +1,5 @@
+// Metadata for SPA
+
 export default function Meta() {
   return (
     <>

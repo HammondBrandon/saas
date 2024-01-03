@@ -1,3 +1,5 @@
+// Basic layout to use for pages
+
 import Meta from "../components/Meta";
 import Navbar from "../components/Navbar";
 
