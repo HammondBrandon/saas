@@ -21,7 +21,24 @@ export default async function handler(req, res) {
     return res.status(400).end();
   }
 
-  console.log(event);
+  try {
+    console.log(event);
+    switch (event.type) {
+      case "customer.subscription.updated":
+        await updateSubscription(event);
+        break;
+      case "customer.subscription.deleted":
+        await deleteSubscription(event);
+        break;
+    }
 
-  res.send({ success: true });
+    res.send({ success: true });
+  } catch (error) {
+    console.log(error.message);
+    res.send({ success: false });
+  }
 }
+
+async function updateSubscription(event) {}
+
+async function deleteSubscription(event) {}
