@@ -23,11 +23,11 @@ export async function getStaticProps() {
       price: price.unit_amount / 100,
       interval: price.recurring.interval,
     });
-
-    return {
-      props: {
-        plans,
-      },
-    };
   }
+
+  return {
+    props: {
+      plans,
+    },
+  };
 }
