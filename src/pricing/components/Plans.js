@@ -1,4 +1,6 @@
+import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
+import { SITE_URL } from "src/core/utils";
 
 export default function Plans({ plans }) {
   const [selected, setSelected] = useState("month");
@@ -7,6 +9,15 @@ export default function Plans({ plans }) {
   function togglePlan() {
     const interval = selected === "month" ? "year" : "month";
     setSelected(interval);
+  }
+
+  async function onCheckout() {
+    const response = await fetch(`${SITE_URL}/api/checkout/${plan.id}`);
+    const data = await response.json();
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    );
+    await stripe.redirectToCheckout({ sessionId: data.id });
   }
 
   return (
@@ -29,7 +40,7 @@ export default function Plans({ plans }) {
                   Just ${plan.price} / {plan.interval}
                 </div>
                 <div>
-                  <button className="large-button">
+                  <button onClick={onCheckout} className="large-button">
                     <div className="large-button-text">Buy Now</div>
                   </button>
                 </div>
