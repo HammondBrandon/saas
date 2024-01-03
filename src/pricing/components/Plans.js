@@ -4,6 +4,7 @@ import { SITE_URL } from "src/core/utils";
 
 export default function Plans({ plans }) {
   const [selected, setSelected] = useState("month");
+  const [isRedirecting, setRedirecting] = useState(false);
   const plan = plans.find((plan) => plan.interval === selected);
 
   function togglePlan() {
@@ -40,8 +41,14 @@ export default function Plans({ plans }) {
                   Just ${plan.price} / {plan.interval}
                 </div>
                 <div>
-                  <button onClick={onCheckout} className="large-button">
-                    <div className="large-button-text">Buy Now</div>
+                  <button
+                    disabled={isRedirecting}
+                    onClick={onCheckout}
+                    className="large-button"
+                  >
+                    <div className="large-button-text">
+                      {isRedirecting ? "Loading..." : "Buy Now"}
+                    </div>
                   </button>
                 </div>
               </div>
